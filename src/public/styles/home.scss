@@ -2,22 +2,46 @@
     padding: 40px 100px;
 
 
-    .list-products {
-        padding: 40px 0;
+    .list-products .flowbite-card img {
+        inline-size: 100%; /* Đảm bảo ảnh rộng bằng chiều rộng của card */
+        block-size: 200px; /* Bạn có thể điều chỉnh chiều cao theo ý muốn */
+        object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
     }
+
 }
 
 .about {
-    padding: 0 100px;
+    background-color: #f8fafc; // Màu nền nhẹ nhàng
+    padding: 40px 0;
 
-    .about-list {
-        padding: 40px 0;
+    h1 {
+        color: #2b6cb0; // Màu tiêu đề
+    }
+
+    p {
+        color: #4a5568; // Màu chữ mô tả
+    }
+
+    .card {
+        transition: transform 0.2s; // Hiệu ứng hover cho thẻ
+
+        &:hover {
+            transform: scale(1.05); // Phóng to khi hover
+        }
+
+        // Đảm bảo tất cả ảnh có cùng kích thước
+        img {
+            inline-size: 100%; // Chiều rộng 100%
+            block-size: 200px; // Chiều cao cố định
+            object-fit: cover; // Cắt ảnh theo tỷ lệ mà không làm biến dạng
+        }
     }
 }
 
+
 .contact {
     padding: 40px 100px;
-    
+
 }
 
 h1 {

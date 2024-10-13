@@ -60,13 +60,13 @@ const DetailProduct = () => {
                                     <div className="flex gap-4 mt-4">
                                         {/* Select Color */}
                                         <div>
-                                            <span className="text-sm text-gray-700">Color:</span>
+                                            <span className="text-sm text-gray-700">Màu sắc:</span>
                                             <Select
                                                 onChange={(e) => setSelectedColor(e.target.value)}
-                                                defaultValue="Choose a color"
+                                                defaultValue="Chọn màu sắc"
                                                 className="mt-1"
                                             >
-                                                <option disabled>Choose a color</option>
+                                                <option disabled>Chọn màu sắc</option>
                                                 {product.colours.map((color, index) => (
                                                     <option key={index} value={color}>
                                                         {color}
@@ -85,13 +85,13 @@ const DetailProduct = () => {
 
                                         {/* Select Size */}
                                         <div>
-                                            <span className="text-sm text-gray-700">Size:</span>
+                                            <span className="text-sm text-gray-700">Kích thước:</span>
                                             <Select
                                                 onChange={(e) => setSelectedSize(e.target.value)}
-                                                defaultValue="Choose a size"
+                                                defaultValue="Chọn kích thước"
                                                 className="mt-1"
                                             >
-                                                <option disabled>Choose a size</option>
+                                                <option disabled>Chọn kích thước</option>
                                                 {product.size.map((size, index) => (
                                                     <option key={index} value={size}>
                                                         {size}
@@ -103,7 +103,7 @@ const DetailProduct = () => {
 
                                     {/* Product Description */}
                                     <div className="mt-6">
-                                        <h2 className="text-lg font-semibold text-gray-900">Description:</h2>
+                                        <h2 className="text-lg font-semibold text-gray-900">Mô tả:</h2>
                                         <p className="text-gray-700 leading-relaxed mt-2">
                                             {product.description}
                                         </p>
@@ -112,7 +112,7 @@ const DetailProduct = () => {
                                     {/* Action Buttons */}
                                     <div className="flex items-center gap-4 mt-6">
                                         <Button gradientDuoTone="pinkToOrange" pill>
-                                            Add to Cart
+                                            Thêm vào giỏ hàng
                                         </Button>
                                     </div>
                                 </div>

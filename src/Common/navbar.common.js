@@ -10,15 +10,15 @@ const NarbarHome = () => {
             }} fluid rounded>
                 <Navbar.Brand >
                     <img src={logo} className="rounded-full w-20 h-20" alt="Phuong Thanh Sport Logo" />
-                    <span className="self-center whitespace-nowrap text-3xl font-semibold dark:text-white">PhuongThanhSport</span>
+                    <Navbar.Link href = "/home" className="self-center whitespace-nowrap text-3xl font-semibold dark:text-white">Phương Thành Sport</Navbar.Link>
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     <Navbar.Link className = "text-xl font-bold" href="/home" active>
                         Home
                     </Navbar.Link>
-                    <Navbar.Link className = "text-xl font-bold" href="/home/tin-tuc">News</Navbar.Link>
-                    <Navbar.Link className = "text-xl font-bold" href="/home/product">Product</Navbar.Link>
+                    <Navbar.Link className = "text-xl font-bold" href="/home/tin-tuc">Tin Tức</Navbar.Link>
+                    <Navbar.Link className = "text-xl font-bold" href="/home/product">Sản phẩm</Navbar.Link>
                 </Navbar.Collapse>
             </Navbar>
         </>

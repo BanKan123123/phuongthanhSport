@@ -45,13 +45,6 @@ const NewsAdmin = () => {
         }));
     };
 
-    const handleImageChange = (e) => {
-        setNewNews((prevState) => ({
-            ...prevState,
-            images: [e.target.value]
-        }));
-    };
-
     const handleAddNews = async () => {
         try {
             const response = await fetch(API_NEWS, {
@@ -72,16 +65,17 @@ const NewsAdmin = () => {
 
     return (
         <>
-            <h1>Products</h1>
-            <Button onClick={() => setIsModalOpen(true)}>Add New News</Button>
+            <h1>Tin tức</h1>
+            <Button onClick={() => setIsModalOpen(true)}>Thêm mới tin tức</Button>
 
             {/* Modal for adding news */}
             <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <Modal.Header>Add New News</Modal.Header>
+                <Modal.Header>Thêm mới tin tức</Modal.Header>
                 <Modal.Body>
                     <form>
+                        {/* Tiêu đề */}
                         <div className="mb-4">
-                            <Label htmlFor="title" value="Title" />
+                            <Label htmlFor="title" value="Tiêu đề" />
                             <TextInput
                                 id="title"
                                 name="title"
@@ -90,8 +84,10 @@ const NewsAdmin = () => {
                                 required
                             />
                         </div>
+
+                        {/* Mô tả */}
                         <div className="mb-4">
-                            <Label htmlFor="description" value="Description" />
+                            <Label htmlFor="description" value="Mô tả" />
                             <Textarea
                                 id="description"
                                 name="description"
@@ -100,22 +96,27 @@ const NewsAdmin = () => {
                                 required
                             />
                         </div>
+
+                        {/* Hình ảnh */}
                         <div className="mb-4">
-                            <Label htmlFor="image" value="Image URL" />
-                            <TextInput
-                                id="image"
-                                name="image"
-                                value={newNews.images[0]}
-                                onChange={handleImageChange}
+                            <Label htmlFor="images" value="Hình ảnh (Past link hình ảnh vào đây)" />
+                            <Textarea
+                                id="images"
+                                name="images"
+                                value={newNews.images.join(", ")} // Hiển thị dưới dạng chuỗi
+                                onChange={(e) => {
+                                    const urls = e.target.value.split(",").map(url => url.trim());
+                                    setNewNews({ ...newNews, images: urls });
+                                }}
                                 required
                             />
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleAddNews}>Add News</Button>
+                    <Button onClick={handleAddNews}>Thêm mới</Button>
                     <Button color="gray" onClick={() => setIsModalOpen(false)}>
-                        Cancel
+                        Hủy
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -124,10 +125,10 @@ const NewsAdmin = () => {
                 <Table>
                     <Table.Head>
                         <Table.HeadCell>Id</Table.HeadCell>
-                        <Table.HeadCell>Title</Table.HeadCell>
-                        <Table.HeadCell>Description</Table.HeadCell>
-                        <Table.HeadCell>Image</Table.HeadCell>
-                        <Table.HeadCell>Delete</Table.HeadCell>
+                        <Table.HeadCell>Tiêu đề</Table.HeadCell>
+                        <Table.HeadCell>Mô tả</Table.HeadCell>
+                        <Table.HeadCell>Hình ảnh</Table.HeadCell>
+                        <Table.HeadCell>Xóa</Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {news.map((product) => (
@@ -149,7 +150,7 @@ const NewsAdmin = () => {
                                         className="text-red-500 hover:text-red-700"
                                         onClick={() => handleDelete(product.id)}
                                     >
-                                        Delete
+                                        Xóa
                                     </button>
                                 </Table.Cell>
                             </Table.Row>

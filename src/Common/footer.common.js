@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -9,10 +10,10 @@ const Footer = () => {
                 <div
                     class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
                     <div class="me-12 hidden lg:block">
-                        <span>Get connected with us on social networks:</span>
+                        <span>Hãy kết nối với chúng tôi trên các mạng xã hội:</span>
                     </div>
                     <div class="flex justify-center">
-                        <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
+                        <Link href="https://www.facebook.com/thoitrangthethaoali" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -20,8 +21,8 @@ const Footer = () => {
                                 <path
                                     d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
                             </svg>
-                        </a>
-                        <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4 ">
+                        </Link>
+                        <Link href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4 ">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -29,7 +30,7 @@ const Footer = () => {
                                 <path
                                     d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
                             </svg>
-                        </a>
+                        </Link>
                         <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -83,36 +84,17 @@ const Footer = () => {
                                             d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
                                     </svg>
                                 </span>
-                                TW Elements
+                                Phương Thanh Sport
                             </h6>
                             <p>
-                                Here you can use rows and columns to organize your footer
-                                content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit.
+                                Tại đây bạn có thể sử dụng các hàng và cột để sắp xếp nội dung chân trang của mình. 
+                                Điều rất quan trọng là khách hàng phải chú ý đến quá trình hấp thụ.
                             </p>
                         </div>
                         <div>
                             <h6
                                 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-                                Products
-                            </h6>
-                            <p class="mb-4">
-                                <a href="#!">Angular</a>
-                            </p>
-                            <p class="mb-4">
-                                <a href="#!">React</a>
-                            </p>
-                            <p class="mb-4">
-                                <a href="#!">Vue</a>
-                            </p>
-                            <p>
-                                <a href="#!">Laravel</a>
-                            </p>
-                        </div>
-                        <div>
-                            <h6
-                                class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-                                Useful links
+                                Liên kết hữu ích
                             </h6>
                             <p class="mb-4">
                                 <a href="#!">Pricing</a>
@@ -130,7 +112,7 @@ const Footer = () => {
                         <div>
                             <h6
                                 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-                                Contact
+                                Liên hệ
                             </h6>
                             <p class="mb-4 flex items-center justify-center md:justify-start">
                                 <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
@@ -144,7 +126,7 @@ const Footer = () => {
                                             d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
                                     </svg>
                                 </span>
-                                New York, NY 10012, US
+                                Hà Nội, Việt Nam
                             </p>
                             <p class="mb-4 flex items-center justify-center md:justify-start">
                                 <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
@@ -158,7 +140,7 @@ const Footer = () => {
                                             d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
                                     </svg>
                                 </span>
-                                info@example.com
+                                phuongthanhsport2@gmail.com
                             </p>
                             <p class="mb-4 flex items-center justify-center md:justify-start">
                                 <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
@@ -172,21 +154,7 @@ const Footer = () => {
                                             clip-rule="evenodd" />
                                     </svg>
                                 </span>
-                                + 01 234 567 88
-                            </p>
-                            <p class="flex items-center justify-center md:justify-start">
-                                <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor">
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 003 3h.27l-.155 1.705A1.875 1.875 0 007.232 22.5h9.536a1.875 1.875 0 001.867-2.045l-.155-1.705h.27a3 3 0 003-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0018 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM16.5 6.205v-2.83A.375.375 0 0016.125 3h-8.25a.375.375 0 00-.375.375v2.83a49.353 49.353 0 019 0zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 01-.374.409H7.232a.375.375 0 01-.374-.409l.526-5.784a.373.373 0 01.333-.337 41.741 41.741 0 018.566 0zm.967-3.97a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H18a.75.75 0 01-.75-.75V10.5zM15 9.75a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V10.5a.75.75 0 00-.75-.75H15z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                                + 01 234 567 89
+                                0787197663
                             </p>
                         </div>
                     </div>
