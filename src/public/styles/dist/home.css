@@ -1,0 +1,22 @@
+.main {
+  padding: 40px 100px;
+}
+.main .list-products {
+  padding: 40px 0;
+}
+
+.about {
+  padding: 40px 100px;
+}
+.about .about-list {
+  padding: 40px 0;
+}
+
+.contact {
+  padding: 40px 100px;
+}
+
+h1 {
+  font-size: 35px;
+  font-weight: 700;
+}

@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { Navigate, useLocation, useMatch } from 'react-router-dom';
+import HomeWeb from './Components/home/homeweb.component';
+import HomeAdmin from './Components/home/homeadmin.component';
+import PageNotFound from './Common/404.common';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const location = useLocation();
+
+  const isWebRoute = useMatch('/home/*');
+  const isAdminRoute = useMatch('/admin/*');
+  const isDetailRoute = useMatch('/home/product/detail/:id');
+
+  if (location.pathname === '/') {
+    return <Navigate to="/home/" />;
+  } else if (isWebRoute || isDetailRoute) {
+    return <HomeWeb />;
+  } else if (isAdminRoute) {
+    return <HomeAdmin />;
+  } else {
+    return <PageNotFound />;
+  }
 }
 
 export default App;
