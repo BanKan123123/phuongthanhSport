@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Carousel, Button, Card, Select } from "flowbite-react";
 import ProductComponent from "../product.component";
 import { API_PRODUCT } from "../../../Common/const/api.const";
+import '../../../Common/styles/products.scss';
 
 const DetailProduct = () => {
     const [product, setProduct] = useState(null);
@@ -31,22 +32,22 @@ const DetailProduct = () => {
                     <div className="container mx-auto px-4">
                         <div className="flex flex-col lg:flex-row gap-8">
                             {/* Carousel for Product Images */}
-                            <div className="lg:w-1/2">
-                                <Carousel slide={true}>
+                            <div className="w-full lg:w-1/2">
+                                <Carousel slide={true} className="w-full h-full carousel">
                                     {product.images.map((image, index) => (
                                         <img
                                             key={index}
                                             src={image}
                                             alt={product.name}
-                                            className="object-cover object-center w-full h-96 rounded-lg"
+                                            className="object-cover object-center w-full h-64 md:h-80 lg:h-96 rounded-lg"
                                         />
                                     ))}
                                 </Carousel>
                             </div>
                             {/* Product Details */}
-                            <div className="lg:w-1/2">
+                            <div className="lg:w-1/2 flex flex-col">
                                 <div className="flex flex-col gap-4">
-                                    <h1 className="text-3xl font-bold text-gray-900">
+                                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
                                         {product.name}
                                     </h1>
                                     <div className="flex items-center gap-3">
@@ -57,9 +58,9 @@ const DetailProduct = () => {
                                     </div>
 
                                     {/* Color & Size Selector */}
-                                    <div className="flex gap-4 mt-4">
+                                    <div className="flex flex-col sm:flex-row gap-4 mt-4">
                                         {/* Select Color */}
-                                        <div>
+                                        <div className="flex flex-col">
                                             <span className="text-sm text-gray-700">Màu sắc:</span>
                                             <Select
                                                 onChange={(e) => setSelectedColor(e.target.value)}
@@ -84,7 +85,7 @@ const DetailProduct = () => {
                                         </div>
 
                                         {/* Select Size */}
-                                        <div>
+                                        <div className="flex flex-col">
                                             <span className="text-sm text-gray-700">Kích thước:</span>
                                             <Select
                                                 onChange={(e) => setSelectedSize(e.target.value)}
@@ -112,7 +113,9 @@ const DetailProduct = () => {
                                     {/* Action Buttons */}
                                     <div className="flex items-center gap-4 mt-6">
                                         <Button gradientDuoTone="pinkToOrange" pill>
-                                            Thêm vào giỏ hàng
+                                            <Link to="https://www.tiktok.com/@phuongthanhsport">
+                                                Thêm vào giỏ hàng
+                                            </Link>
                                         </Button>
                                     </div>
                                 </div>
@@ -122,7 +125,7 @@ const DetailProduct = () => {
                         {/* Product Data Section */}
                         <div className="mt-12">
                             <Card>
-                                <h2 className="text-2xl font-bold text-gray-900">Additional Product Information</h2>
+                                <h2 className="text-2xl font-bold text-gray-900">Thêm thông tin khác về sản phẩm</h2>
                                 <p className="text-gray-700 leading-relaxed mt-4">{product.data}</p>
                             </Card>
                         </div>

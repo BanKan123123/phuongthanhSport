@@ -3,9 +3,12 @@
 
 
     .list-products .flowbite-card img {
-        inline-size: 100%; /* Đảm bảo ảnh rộng bằng chiều rộng của card */
-        block-size: 200px; /* Bạn có thể điều chỉnh chiều cao theo ý muốn */
-        object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
+        inline-size: 100%;
+        /* Đảm bảo ảnh rộng bằng chiều rộng của card */
+        block-size: 200px;
+        /* Bạn có thể điều chỉnh chiều cao theo ý muốn */
+        object-fit: cover;
+        /* Đảm bảo ảnh không bị biến dạng */
     }
 
 }
@@ -47,4 +50,10 @@
 h1 {
     font-size: 35px;
     font-weight: 700;
+}
+
+@media screen and (max-width: 800px) {
+    .main {
+        padding: 0;
+    }
 }

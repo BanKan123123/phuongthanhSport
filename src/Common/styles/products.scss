@@ -12,3 +12,18 @@ h1 {
         padding: 40px 100px;
     }
 }
+
+.carousel {
+    /* Ensures carousel expands correctly */
+    max-inline-size: 100%;
+    /* Prevents overflow */
+    block-size: auto;
+    /* Maintains aspect ratio */
+}
+
+@media (max-width: 640px) {
+    .carousel img {
+        block-size: 200px;
+        /* Adjust image height for smaller screens */
+    }
+}

@@ -40,23 +40,23 @@ const Home = () => {
             </div>
 
             <section className="main">
-                <h1> Danh sách sản phẩm</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-center my-4">Danh sách sản phẩm</h1>
 
-                <div className="list-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 p-4">
+                <div className="list-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 justify-center rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 p-4 sm:p-6 lg:p-8">
                     {products.map(product => (
                         <Card
                             key={product.id}
-                            className="flowbite-card h-full flex flex-col p-6 rounded-lg shadow-lg bg-gray-50 dark:bg-gray-700 hover:shadow-xl transition-shadow duration-300"
+                            className="flowbite-card h-full flex flex-col p-4 sm:p-6 rounded-lg shadow-lg bg-gray-50 dark:bg-gray-700 hover:shadow-xl transition-shadow duration-300"
                             imgAlt={product.name}
                             imgSrc={product.images[0]}
                         >
                             <Link to={`/home/product/detail/${product.id}`}>
-                                <h5 className="text-lg font-bold tracking-tight text-gray-900 dark:text-white truncate">
+                                <h5 className="text-base sm:text-lg font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                     {product.name}
                                 </h5>
                             </Link>
+
                             <div className="mt-2 flex items-center space-x-1">
-                                {/* Render 5 sao */}
                                 {[...Array(5)].map((_, i) => (
                                     <svg
                                         key={i}
@@ -70,13 +70,14 @@ const Home = () => {
                                 ))}
                                 <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">5.0</span>
                             </div>
+
                             <div className="mt-4 flex flex-col sm:flex-row items-center justify-between">
-                                <span className="text-xl font-bold text-gray-900 dark:text-white">{product.price} VND</span>
+                                <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{product.price} VND</span>
                             </div>
-                            {/* Di chuyển nút Add to cart xuống dòng mới */}
+
                             <Link
-                                to="#"
-                                className="mt-4 rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                                to="https://www.tiktok.com/@phuongthanhsport"
+                                className="mt-4 w-full sm:w-auto text-center rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                             >
                                 Thêm vào giỏ hàng
                             </Link>
