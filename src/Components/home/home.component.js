@@ -30,11 +30,23 @@ const Home = () => {
 
     return (
         <>
-            <div className="h-96 sm:h-96 xl:h-96 2xl:h-96">
-                <Carousel >
-                    <img src="https://i.imgur.com/JqSvVhM.jpeg" alt="Banner ao" />
-                    <img src="https://i.imgur.com/o8Y9xwJ.jpeg" alt="Banner ao" />
-                    <img src="https://i.imgur.com/k2tzJG6.jpeg" alt="Banner ao" />
+            <div className="h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]">
+                <Carousel>
+                    <img
+                        src="https://i.imgur.com/JqSvVhM.jpeg"
+                        alt="Banner ao"
+                        className="w-full h-full object-cover object-center"
+                    />
+                    <img
+                        src="https://i.imgur.com/o8Y9xwJ.jpeg"
+                        alt="Banner ao"
+                        className="w-full h-full object-cover object-center"
+                    />
+                    <img
+                        src="https://i.imgur.com/k2tzJG6.jpeg"
+                        alt="Banner ao"
+                        className="w-full h-full object-cover object-center"
+                    />
                 </Carousel>
             </div>
 
@@ -75,7 +87,7 @@ const Home = () => {
                             </div>
 
                             <Link
-                                to="https://vt.tiktok.com/ZMhytxYow/?page=TikTokShop"
+                                to="https://www.facebook.com/thoitrangthethaoali"
                                 className="mt-4 w-full sm:w-auto text-center rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                             >
                                 Thêm vào giỏ hàng
