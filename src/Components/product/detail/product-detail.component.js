@@ -24,6 +24,10 @@ const DetailProduct = () => {
         fetchDataProductByMa();
     }, [id]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [product]);
+
     // List of random colors
     return (
         <>
