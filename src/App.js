@@ -6,6 +6,11 @@ import Login from './Components/auth/login.component';
 import { useEffect } from 'react';
 
 function App() {
+
+  useEffect(() => {
+    document.title = 'Phương Thanh Sport';
+  }, []);
+
   const location = useLocation();
 
   const isWebRoute = useMatch('/home/*');

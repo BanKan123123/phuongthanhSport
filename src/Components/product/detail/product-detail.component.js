@@ -32,15 +32,16 @@ const DetailProduct = () => {
                     <div className="container mx-auto px-4">
                         <div className="flex flex-col lg:flex-row gap-8">
                             {/* Carousel for Product Images */}
-                            <div className="w-full lg:w-1/2">
-                                <Carousel slide={true} className="w-full h-full carousel">
+                            <div className="w-full h-auto lg:w-1/2">
+                                <Carousel slide={true} className="w-full h-full">
                                     {product.images.map((image, index) => (
-                                        <img
-                                            key={index}
-                                            src={image}
-                                            alt={product.name}
-                                            className="object-cover object-center w-full h-64 md:h-80 lg:h-96 rounded-lg"
-                                        />
+                                        <div key={index} className="relative w-full h-64 md:h-80 lg:h-96">
+                                            <img
+                                                src={image}
+                                                alt={product.name}
+                                                className="object-cover object-center w-full h-full rounded-lg"
+                                            />
+                                        </div>
                                     ))}
                                 </Carousel>
                             </div>
@@ -113,7 +114,7 @@ const DetailProduct = () => {
                                     {/* Action Buttons */}
                                     <div className="flex items-center gap-4 mt-6">
                                         <Button gradientDuoTone="pinkToOrange" pill>
-                                            <Link to="https://www.tiktok.com/@phuongthanhsport">
+                                            <Link to="https://www.facebook.com/thoitrangthethaoali">
                                                 Thêm vào giỏ hàng
                                             </Link>
                                         </Button>
