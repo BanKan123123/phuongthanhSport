@@ -87,7 +87,7 @@ const Home = () => {
                             </div>
 
                             <Link
-                                to="https://www.facebook.com/thoitrangthethaoali"
+                                to="https://www.facebook.com/profile.php?id=61566847335730&is_tour_dismissed"
                                 className="mt-4 w-full sm:w-auto text-center rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                             >
                                 Thêm vào giỏ hàng

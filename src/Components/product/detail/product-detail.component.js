@@ -118,7 +118,7 @@ const DetailProduct = () => {
                                     {/* Action Buttons */}
                                     <div className="flex items-center gap-4 mt-6">
                                         <Button gradientDuoTone="pinkToOrange" pill>
-                                            <Link to="https://www.facebook.com/thoitrangthethaoali">
+                                            <Link to="https://www.facebook.com/profile.php?id=61566847335730&is_tour_dismissed">
                                                 Thêm vào giỏ hàng
                                             </Link>
                                         </Button>

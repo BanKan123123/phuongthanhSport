@@ -10,7 +10,7 @@ const Footer = () => {
                         <span>Hãy kết nối với chúng tôi trên các mạng xã hội:</span>
                     </div>
                     <div class="flex justify-center space-x-6">
-                        <a href="https://www.facebook.com/thoitrangthethaoali" class="h-6 w-6">
+                        <a href="https://www.facebook.com/profile.php?id=61566847335730&is_tour_dismissed" class="h-6 w-6">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 320 512">
                                 <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5 16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
                             </svg>
@@ -87,7 +87,7 @@ const Footer = () => {
                             <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">Liên hệ với chúng tôi</h6>
                             <p class="mb-4">
                                 <Link to="https://www.tiktok.com/@phuongthanhsport" class="block text-blue-600 dark:text-blue-500">Tiktok</Link>
-                                <Link to="https://www.facebook.com/thoitrangthethaoali" class="block text-blue-600 dark:text-blue-500">Facebook</Link>
+                                <Link to="https://www.facebook.com/profile.php?id=61566847335730&is_tour_dismissed" class="block text-blue-600 dark:text-blue-500">Facebook</Link>
                             </p>
                         </div>
                     </div>

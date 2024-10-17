@@ -19,6 +19,8 @@ const ProductAdmin = () => {
         description: "",
         data: ""
     });
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editProduct, setEditProduct] = useState(null);
 
     const navigate = useNavigate();
 
@@ -60,6 +62,32 @@ const ProductAdmin = () => {
             console.error(error.message);
         }
     };
+
+    const handelEdit = async (productId) => {
+        const productToEdit = products.find((product) => product.id === productId);
+        setEditProduct(productToEdit); // Set the product data to be edited
+        setIsModalOpen(true); // Open the modal
+    }
+
+    const handleInputEditChange = (e) => {
+        const { name, value } = e.target;
+        setEditProduct((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
+        }));
+    };
+
+    // Function to handle form submission (PUT request)
+    const handleUpdateProduct = async () => {
+        try {
+            await axios.put(`${API_PRODUCT}/${editProduct.id}`, editProduct);
+            setIsModalOpen(false); // Close the modal after updating
+            // Optionally, you can refresh the product list here
+        } catch (error) {
+            console.error("Error updating product:", error);
+        }
+    };
+
 
     return (
         <>
@@ -108,6 +136,69 @@ const ProductAdmin = () => {
                                         Xóa
                                     </button>
                                 </Table.Cell>
+
+                                <Table.Cell>
+                                    <button
+                                        className="text-red-500 hover:text-red-700"
+                                        onClick={() => handelEdit(product.id)}
+                                    >
+                                        Sửa
+                                    </button>
+                                </Table.Cell>
+
+                                {/* Modal for editing product */}
+                                {editProduct && (
+                                    <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                                        <Modal.Header>Edit Product</Modal.Header>
+                                        <Modal.Body>
+                                            <form>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Product Name
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="name"
+                                                        value={editProduct.name}
+                                                        onChange={handleInputEditChange}
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Brand
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="brand"
+                                                        value={editProduct.brand}
+                                                        onChange={handleInputEditChange}
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Price
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="price"
+                                                        value={editProduct.price}
+                                                        onChange={handleInputEditChange}
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+                                                {/* Add more fields here as needed */}
+                                            </form>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button onClick={handleUpdateProduct}>Save Changes</Button>
+                                            <Button color="gray" onClick={() => setIsModalOpen(false)}>
+                                                Cancel
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
+                                )}
                             </Table.Row>
                         ))}
                     </Table.Body>

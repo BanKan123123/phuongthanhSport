@@ -30,7 +30,7 @@ const NewsPage = () => {
                         <div key={newItem.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
                             <img
                                 className="w-full h-56 object-cover"
-                                src={newItem.images} // Thay thế src bằng ảnh đầu tiên trong mảng images
+                                src={newItem.detail[0].image} // Thay thế src bằng ảnh đầu tiên trong mảng images
                                 alt={newItem.title}
                                 style={{ width: "800px", height: "600px" }}
                             />
