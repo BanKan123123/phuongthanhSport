@@ -87,7 +87,7 @@ const NewsDetail = () => {
                                         <img
                                             src={item.image}
                                             alt={item.title}
-                                            className="h-full w-full sm:w-[600px] md:w-[700px] lg:w-[750px] xl:w-[800px] object-cover"
+                                            className="h-full w-full sm:w-[500px] md:w-[550px] lg:w-[600px] xl:w-[650] object-cover"
                                         />
                                     </div>
                                     {/* Data */}
