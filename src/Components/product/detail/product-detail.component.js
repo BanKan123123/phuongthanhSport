@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Carousel, Button, Card, Select } from "flowbite-react";
+import { Carousel, Button, Card, Select, Badge } from "flowbite-react";
 import ProductComponent from "../product.component";
 import { API_PRODUCT } from "../../../Common/const/api.const";
 import '../../../Common/styles/products.scss';
@@ -39,7 +39,7 @@ const DetailProduct = () => {
                             <div className="w-full h-auto lg:w-1/2">
                                 <Carousel slide={true} className="w-full h-full">
                                     {product.images.map((image, index) => (
-                                        <div key={index} className="relative w-full h-64 md:h-80 lg:h-96">
+                                        <div key={index} className="relative w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[550px]">
                                             <img
                                                 src={image}
                                                 alt={product.name}
@@ -55,6 +55,7 @@ const DetailProduct = () => {
                                     <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
                                         {product.name}
                                     </h1>
+                                    <Badge className = "w-[80px] text-center"><h3 className = "text-base">{product.brand}</h3></Badge>
                                     <div className="flex items-center gap-3">
                                         <span className="text-lg font-semibold text-gray-600">
                                             {product.price} VND
@@ -107,13 +108,7 @@ const DetailProduct = () => {
                                         </div>
                                     </div>
 
-                                    {/* Product Description */}
-                                    <div className="mt-6">
-                                        <h2 className="text-lg font-semibold text-gray-900">Mô tả:</h2>
-                                        <p className="text-gray-700 leading-relaxed mt-2">
-                                            {product.description}
-                                        </p>
-                                    </div>
+
 
                                     {/* Action Buttons */}
                                     <div className="flex items-center gap-4 mt-6">
@@ -126,7 +121,13 @@ const DetailProduct = () => {
                                 </div>
                             </div>
                         </div>
-
+                        {/* Product Description */}
+                        <div className="mt-6">
+                            <h2 className="text-lg font-semibold text-gray-900">Mô tả:</h2>
+                            <p className="text-gray-700 leading-relaxed mt-2">
+                                {product.description}
+                            </p>
+                        </div>
                         {/* Product Data Section */}
                         <div className="mt-12">
                             <Card>

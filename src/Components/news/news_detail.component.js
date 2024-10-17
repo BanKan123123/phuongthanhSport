@@ -82,11 +82,14 @@ const NewsDetail = () => {
                                             <p key={index}>{sentence}.</p>
                                         ))}
                                     </div>
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="w-full h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] object-cover"
-                                    />
+                                    {/* Image container with Flexbox to center the image */}
+                                    <div className="flex justify-center mb-4">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="h-full w-full sm:w-[600px] md:w-[700px] lg:w-[750px] xl:w-[800px] object-cover"
+                                        />
+                                    </div>
                                     {/* Data */}
                                     <div className="text-gray-800 font-semibold text-lg leading-relaxed space-y-2">
                                         {item.data.split('. ').map((feature, index) => (

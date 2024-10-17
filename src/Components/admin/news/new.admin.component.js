@@ -6,11 +6,13 @@ import axios from "axios";
 
 const NewsAdmin = () => {
     const [news, setNews] = useState([]);
+    const [uploadStatus, setUploadStatus] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newNews, setNewNews] = useState({
         title: "",
         description: "",
-        images: [""]
+        images: [""],
+        detail: []
     });
     const navigate = useNavigate();
 
@@ -63,6 +65,32 @@ const NewsAdmin = () => {
         }
     };
 
+    const handleFileChange = (e) => {
+        console.log(e.target.files[0]);
+        handleUpload(e.target.files[0]);
+    }
+
+    const handleUpload = async (file) => {
+        if (!file) {
+            alert("File isn't selected");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        
+
+        try {
+
+
+        } catch (err) {
+            console.error('Error uploading file:', err);
+            setUploadStatus('Error uploading the file');
+        }
+
+    }
+
     return (
         <>
             <h1>Tin tức</h1>
@@ -99,16 +127,15 @@ const NewsAdmin = () => {
 
                         {/* Hình ảnh */}
                         <div className="mb-4">
-                            <Label htmlFor="images" value="Hình ảnh (Past link hình ảnh vào đây)" />
-                            <Textarea
+                            <Label htmlFor="images" value="Hình ảnh (Chọn ảnh từ máy)" />
+                            <input
+                                type="file"
                                 id="images"
                                 name="images"
-                                value={newNews.images.join(", ")} // Hiển thị dưới dạng chuỗi
-                                onChange={(e) => {
-                                    const urls = e.target.value.split(",").map(url => url.trim());
-                                    setNewNews({ ...newNews, images: urls });
-                                }}
+                                accept="image/*"
+                                onChange={(e) => handleFileChange(e)} // Update this function
                                 required
+                                multiple
                             />
                         </div>
                     </form>

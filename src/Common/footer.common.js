@@ -44,15 +44,6 @@ const Footer = () => {
                                 </span>
                                 Phương Thanh Sport
                             </h6>
-                            <p>Tại đây bạn có thể sử dụng các hàng và cột để sắp xếp nội dung chân trang của mình. Điều rất quan trọng là khách hàng phải chú ý đến quá trình hấp thụ.</p>
-                        </div>
-
-                        <div>
-                            <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">Liên kết hữu ích</h6>
-                            <p class="mb-4"><a href="#!">Pricing</a></p>
-                            <p class="mb-4"><a href="#!">Settings</a></p>
-                            <p class="mb-4"><a href="#!">Orders</a></p>
-                            <p><a href="#!">Help</a></p>
                         </div>
 
                         <div>
