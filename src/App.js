@@ -4,6 +4,7 @@ import HomeAdmin from './Components/home/homeadmin.component';
 import PageNotFound from './Common/404.common';
 import Login from './Components/auth/login.component';
 import { useEffect } from 'react';
+import ReactGA from "react-ga4";
 
 function App() {
 
@@ -25,6 +26,12 @@ function App() {
       localStorage.clear(); // Clear localStorage when navigating to home
     }
   }, [isWebRoute, isLogin]);
+
+  useEffect(() => {
+    ReactGA.initialize("G-C15SXDCYFN");
+    ReactGA.send("pageview");
+  }, []);
+
 
   if (location.pathname === '/') {
     return <Navigate to="/home/" />;

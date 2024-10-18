@@ -7,10 +7,12 @@ import Footer from "../../Common/footer.common";
 import NewsPage from "../news/news.component";
 import NewsDetail from "../news/news_detail.component";
 import FloatButton from "../../Common/float-button.common";
+import TrackPageView from "../../Common/trackpageview";
 
 const HomeWeb = () => {
     return (
         <>
+            <TrackPageView />
             <NarbarHome />
             <Routes>
                 <Route path="" element={<Home />} />
