@@ -13,7 +13,7 @@ const ProductComponent = () => {
         try {
             const response = await axios.get(API_PRODUCT);
             setProducts(response.data);
-            setFilteredProducts(response.data); // Initialize filtered products
+            setFilteredProducts(response.data); // Khởi tạo danh sách đã lọc bằng tất cả sản phẩm
         } catch (error) {
             console.error("Error fetching products:", error);
         }
@@ -24,13 +24,18 @@ const ProductComponent = () => {
     }, []);
 
     const handleFilterChange = (event) => {
-        const category = event.target.value;
+        const category = event.target.value.trim().toLowerCase();
+
+        if (!products || products.length === 0) {
+            return; // Nếu chưa có sản phẩm hoặc danh sách trống, không thực hiện lọc
+        }
+
         if (category === "") {
-            setFilteredProducts(products); // Reset filter
+            setFilteredProducts(products); // Đặt lại danh sách đã lọc khi không có category
         } else {
-            const filtered = filteredProducts.filter((product) => {
-                return product.category.toLowerCase() === category.trim().toLowerCase()
-            });
+            const filtered = products.filter((product) =>
+                product.category.toLowerCase() === category
+            );
             setFilteredProducts(filtered);
         }
     };
