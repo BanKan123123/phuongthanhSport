@@ -6,7 +6,9 @@ import { API_PRODUCT } from "../../Common/const/api.const";
 
 const ProductComponent = () => {
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([
+
+    ]);
     const [selectedCategory, setSelectedCategory] = useState("");
 
     useEffect(() => {
@@ -25,11 +27,12 @@ const ProductComponent = () => {
 
     const handleFilterChange = (event) => {
         const category = event.target.value;
-        setSelectedCategory(category);
         if (category === "") {
             setFilteredProducts(products); // Reset filter
         } else {
-            const filtered = products.filter((product) => product.category === category);
+            const filtered = products.filter((product) => {
+                return product.category.toLowerCase() === category.trim().toLowerCase()
+            });
             setFilteredProducts(filtered);
         }
     };
@@ -44,12 +47,12 @@ const ProductComponent = () => {
                     <select
                         className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                         value={selectedCategory}
-                        onChange={handleFilterChange}
+                        onChange={(e) => handleFilterChange(e)}
                     >
                         <option value="">Tất cả danh mục</option>
-                        <option value="Áo">Áo</option>
-                        <option value="Vợ">Vợt</option>
-                        <option value="Giày">Giày</option>
+                        <option value="áo">Áo</option>
+                        <option value="vợt">Vợt</option>
+                        <option value="giày">Giày</option>
                     </select>
                 </div>
 

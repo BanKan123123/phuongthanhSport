@@ -6,14 +6,20 @@ import axios from "axios";
 
 const NewsAdmin = () => {
     const [news, setNews] = useState([]);
-    const [uploadStatus, setUploadStatus] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newNews, setNewNews] = useState({
         title: "",
         description: "",
-        images: [""],
-        detail: []
+        detail: [
+            {
+                title: "",
+                description: "",
+                image: "",
+                data: ""
+            },
+        ]
     });
+
     const navigate = useNavigate();
 
     const fetchNews = async () => {
@@ -49,47 +55,78 @@ const NewsAdmin = () => {
 
     const handleAddNews = async () => {
         try {
-            const response = await fetch(API_NEWS, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newNews),
-            });
-            if (response.ok) {
-                fetchNews(); // Refresh the list after successful addition
-                setIsModalOpen(false); // Close the modal
-            }
-        } catch (error) {
-            console.error("Error adding news:", error);
+            await axios.post(API_NEWS, newNews);
+            navigate(0);
+        } catch (err) {
+            console.err(err);
         }
     };
 
-    const handleFileChange = (e) => {
-        console.log(e.target.files[0]);
-        handleUpload(e.target.files[0]);
-    }
 
-    const handleUpload = async (file) => {
-        if (!file) {
-            alert("File isn't selected");
-            return;
-        }
+    // Function to handle input change for the detail array
+    const handleDetailChange = (index, e) => {
+        const { name, value } = e.target;
+        const updatedDetails = newNews.detail.map((detail, i) =>
+            i === index ? { ...detail, [name]: value } : detail
+        );
+        setNewNews((prevNews) => ({
+            ...prevNews,
+            detail: updatedDetails,
+        }));
+    };
 
+    const uploadImageToCloudinary = async (file) => {
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append('file', file);
+        formData.append("upload_preset", "phuongthanhsport");
+        const response = await fetch(
+            `https://api.cloudinary.com/v1_1/danxxxdpj/image/upload`, // Thay YOUR_CLOUD_NAME bằng tên Cloudinary của bạn
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
 
-        
-
-        try {
-
-
-        } catch (err) {
-            console.error('Error uploading file:', err);
-            setUploadStatus('Error uploading the file');
+        const data = await response.json();
+        if (data.secure_url) {
+            return data.secure_url; // Trả về URL ảnh được tải lên
+        } else {
+            throw new Error("Failed to upload image to Cloudinary");
         }
-
     }
+
+    // Function to handle file input for images in detail array
+    const handleDetailFileChange = async (index, e) => {
+        const file = e.target.files[0];
+
+        const urlImage = await uploadImageToCloudinary(file);
+
+        const updatedDetails = newNews.detail.map((detail, i) =>
+            i === index ? { ...detail, image: urlImage } : detail
+        );
+
+        setNewNews((prevNews) => ({
+            ...prevNews,
+            detail: updatedDetails,
+        }));
+    };
+
+    // Add new detail section
+    const addNewDetail = () => {
+        setNewNews((prevNews) => ({
+            ...prevNews,
+            detail: [...prevNews.detail, { title: "", description: "", image: "", data: "" }],
+        }));
+    };
+
+    // Remove a detail section
+    const removeDetail = (index) => {
+        const updatedDetails = newNews.detail.filter((_, i) => i !== index);
+        setNewNews((prevNews) => ({
+            ...prevNews,
+            detail: updatedDetails,
+        }));
+    };
 
     return (
         <>
@@ -125,18 +162,74 @@ const NewsAdmin = () => {
                             />
                         </div>
 
-                        {/* Hình ảnh */}
-                        <div className="mb-4">
-                            <Label htmlFor="images" value="Hình ảnh (Chọn ảnh từ máy)" />
-                            <input
-                                type="file"
-                                id="images"
-                                name="images"
-                                accept="image/*"
-                                onChange={(e) => handleFileChange(e)} // Update this function
-                                required
-                                multiple
-                            />
+                        {/* Chi tiết */}
+                        <div>
+                            {newNews.detail.map((detailItem, index) => (
+                                <div key={index} className="mb-4 border p-3 rounded">
+                                    <h3>Chi tiết {index + 1}</h3>
+                                    <div className="mb-4">
+                                        <Label htmlFor={`detail-title-${index}`} value="Tiêu đề chi tiết" />
+                                        <TextInput
+                                            id={`detail-title-${index}`}
+                                            name="title"
+                                            value={detailItem.title}
+                                            onChange={(e) => handleDetailChange(index, e)}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <Label htmlFor={`detail-description-${index}`} value="Mô tả chi tiết" />
+                                        <Textarea
+                                            id={`detail-description-${index}`}
+                                            name="description"
+                                            value={detailItem.description}
+                                            onChange={(e) => handleDetailChange(index, e)}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <Label htmlFor={`detail-image-${index}`} value="Hình ảnh (Chọn ảnh từ máy)" />
+                                        <input
+                                            type="file"
+                                            id={`detail-image-${index}`}
+                                            name="image"
+                                            accept="image/*"
+                                            onChange={(e) => handleDetailFileChange(index, e)}
+                                            required
+                                        />
+                                        {detailItem.image && (
+                                            <div>
+                                                <img src={detailItem.image} alt="Uploaded Preview" className="mt-2" />
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <Label htmlFor={`detail-data-${index}`} value="Thông tin thêm" />
+                                        <Textarea
+                                            id={`detail-data-${index}`}
+                                            name="data"
+                                            value={detailItem.data}
+                                            onChange={(e) => handleDetailChange(index, e)}
+                                            required
+                                        />
+                                    </div>
+
+                                    {/* Remove detail section */}
+                                    {newNews.detail.length > 1 && (
+                                        <Button color="red" onClick={() => removeDetail(index)}>
+                                            Xóa chi tiết
+                                        </Button>
+                                    )}
+                                </div>
+                            ))}
+
+                            {/* Button to add a new detail */}
+                            <Button onClick={addNewDetail} className="mt-4">
+                                Thêm chi tiết mới
+                            </Button>
                         </div>
                     </form>
                 </Modal.Body>
@@ -170,7 +263,9 @@ const NewsAdmin = () => {
                                     {product.description}
                                 </Table.Cell>
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                    <img src={product.images} alt={product.title} style={{ width: "100px" }} />
+                                    {product.detail.map((item, index) => (
+                                        <img key={index} src={item.image} alt={item.title} style={{ width: "100px" }} />
+                                    ))}
                                 </Table.Cell>
                                 <Table.Cell>
                                     <button

@@ -20,7 +20,62 @@ const ProductAdmin = () => {
         data: ""
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [editProduct, setEditProduct] = useState(null);
+    const [editProduct, setEditProduct] = useState({
+        ma: "",
+        name: "",
+        images: [],
+        brand: "",
+        status: true,
+        colours: [], // Đảm bảo khởi tạo là mảng
+        size: [],
+        price: "",
+        description: "",
+        data: ""
+    });
+
+    const handleFileChange = async (e) => {
+        const files = Array.from(e.target.files); // Chuyển FileList thành Array
+        const uploadedImageUrls = [];
+
+        // Upload từng ảnh lên Cloudinary
+        for (let i = 0; i < files.length; i++) {
+            try {
+                const imageUrl = await uploadImageToCloudinary(files[i]);
+                uploadedImageUrls.push(imageUrl); // Thêm URL của ảnh đã upload vào mảng
+            } catch (error) {
+                console.error("Error uploading image:", error);
+            }
+        }
+
+        // Cập nhật state của newProduct với danh sách các ảnh mới được upload
+        setNewProduct((prevProduct) => ({
+            ...prevProduct,
+            images: [...prevProduct.images, ...uploadedImageUrls], // Giữ lại các ảnh đã có và thêm ảnh mới
+        }));
+    };
+
+    const uploadImageToCloudinary = async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "phuongthanhsport"); // Replace with your Cloudinary upload preset
+
+        const response = await fetch(
+            `https://api.cloudinary.com/v1_1/danxxxdpj/image/upload`, // Replace YOUR_CLOUD_NAME with your Cloudinary cloud name
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
+
+        const data = await response.json();
+        if (data.secure_url) {
+            return data.secure_url; // This is the URL of the uploaded image
+        } else {
+            throw new Error("Failed to upload image to Cloudinary");
+        }
+    };
+
+
 
     const navigate = useNavigate();
 
@@ -58,12 +113,13 @@ const ProductAdmin = () => {
             await axios.post(API_PRODUCT, newProduct);
             setProducts([...products, newProduct]);
             setShowModal(false); // Đóng modal sau khi thêm sản phẩm
+            navigate(0);
         } catch (error) {
             console.error(error.message);
         }
     };
 
-    const handelEdit = async (productId) => {
+    const handelEdit = (productId) => {
         const productToEdit = products.find((product) => product.id === productId);
         setEditProduct(productToEdit); // Set the product data to be edited
         setIsModalOpen(true); // Open the modal
@@ -82,7 +138,7 @@ const ProductAdmin = () => {
         try {
             await axios.put(`${API_PRODUCT}/${editProduct.id}`, editProduct);
             setIsModalOpen(false); // Close the modal after updating
-            // Optionally, you can refresh the product list here
+            navigate(0);
         } catch (error) {
             console.error("Error updating product:", error);
         }
@@ -152,6 +208,7 @@ const ProductAdmin = () => {
                                         <Modal.Header>Edit Product</Modal.Header>
                                         <Modal.Body>
                                             <form>
+                                                {/* Tên sản phẩm */}
                                                 <div className="mb-4">
                                                     <label className="block text-gray-700 text-sm font-bold mb-2">
                                                         Product Name
@@ -164,6 +221,37 @@ const ProductAdmin = () => {
                                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                                                     />
                                                 </div>
+
+                                                {/* Mã sản phẩm */}
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Product Code
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="ma"
+                                                        value={editProduct.ma}
+                                                        onChange={handleInputEditChange}
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+
+                                                {/* Hình ảnh sản phẩm */}
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Product Images
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        name="images"
+                                                        multiple
+                                                        accept="image/*"
+                                                        onChange={handleFileChange} // Hàm xử lý upload nhiều ảnh
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+
+                                                {/* Thương hiệu */}
                                                 <div className="mb-4">
                                                     <label className="block text-gray-700 text-sm font-bold mb-2">
                                                         Brand
@@ -176,6 +264,58 @@ const ProductAdmin = () => {
                                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                                                     />
                                                 </div>
+
+                                                {/* Trạng thái */}
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Status
+                                                    </label>
+                                                    <select
+                                                        name="status"
+                                                        value={editProduct.status ? "true" : "false"}
+                                                        onChange={handleInputEditChange}
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    >
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Unavailable</option>
+                                                    </select>
+                                                </div>
+
+                                                {/* Màu sắc */}
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Colors
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="colours"
+                                                        onChange={(e) => {
+                                                            const colours = e.target.value.split(",").map(color => color.trim());
+                                                            setEditProduct({ ...editProduct, colours: colours });
+                                                        }}
+                                                        placeholder="Enter colours separated by commas"
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+
+                                                {/* Kích thước */}
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Sizes
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="size"
+                                                        onChange={(e) => {
+                                                            const sizes = e.target.value.split(",").map(size => size.trim());
+                                                            setEditProduct({ ...editProduct, size: sizes });
+                                                        }}
+                                                        placeholder="Enter sizes separated by commas"
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+
+                                                {/* Giá */}
                                                 <div className="mb-4">
                                                     <label className="block text-gray-700 text-sm font-bold mb-2">
                                                         Price
@@ -188,7 +328,32 @@ const ProductAdmin = () => {
                                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                                                     />
                                                 </div>
-                                                {/* Add more fields here as needed */}
+
+                                                {/* Mô tả */}
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Description
+                                                    </label>
+                                                    <textarea
+                                                        name="description"
+                                                        value={editProduct.description}
+                                                        onChange={handleInputEditChange}
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
+
+                                                {/* Dữ liệu khác */}
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Additional Data
+                                                    </label>
+                                                    <textarea
+                                                        name="data"
+                                                        value={editProduct.data}
+                                                        onChange={handleInputEditChange}
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                                                    />
+                                                </div>
                                             </form>
                                         </Modal.Body>
                                         <Modal.Footer>
@@ -228,15 +393,16 @@ const ProductAdmin = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <Label htmlFor="images" value="Hình ảnh (note: Paste link hình ảnh vào đây, sau mỗi ảnh thêm dấu ',')" />
-                            <Textarea
-                                id="images"
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Product Images
+                            </label>
+                            <input
+                                type="file"
                                 name="images"
-                                onChange={(e) => {
-                                    const urls = e.target.value.split(",").map(url => url.trim());
-                                    setNewProduct({ ...newProduct, images: urls });
-                                }}
-                                required
+                                multiple
+                                accept="image/*"
+                                onChange={handleFileChange} // Hàm xử lý upload nhiều ảnh
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                             />
                         </div>
                         <div className="mb-4">
@@ -255,7 +421,6 @@ const ProductAdmin = () => {
                             <Textarea
                                 id="sizes"
                                 name="sizes"
-                                value={newProduct.size.join(", ")} // Hiển thị dưới dạng chuỗi
                                 onChange={(e) => {
                                     const sizes = e.target.value.split(",").map(size => size.trim());
                                     setNewProduct({ ...newProduct, size: sizes });
@@ -270,7 +435,6 @@ const ProductAdmin = () => {
                             <Textarea
                                 id="colours"
                                 name="colours"
-                                value={newProduct.colours.join(", ")} // Hiển thị dưới dạng chuỗi
                                 onChange={(e) => {
                                     const colours = e.target.value.split(",").map(colour => colour.trim());
                                     setNewProduct({ ...newProduct, colours });

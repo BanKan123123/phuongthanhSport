@@ -21,7 +21,7 @@ const FloatButton = () => {
                 </div>
 
                 <div class="absolute rounded-full transition-all duration-[0.2s] ease-out scale-x-0 group-hover:scale-x-100 group-hover:-translate-y-14 group-hover:-translate-x-14   flex  p-2 hover:p-3 bg-yellow-300 hover:bg-yellow-400 text-white">
-                    <Link to="https://vt.tiktok.com/ZMhytxYow/?page=TikTokShop">
+                    <Link to="https://www.tiktok.com/@phuongthanhsport">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="w-10 h-10"

@@ -86,7 +86,7 @@ const Footer = () => {
 
                 <div class="text-center p-6 bg-neutral-200 dark:bg-neutral-600">
                     <span>© 2024 Copyright: </span>
-                    <a class="text-neutral-600 dark:text-neutral-300 font-semibold" href="https://thoitrangthethaoali.com/">Phuong Thanh Sport</a>
+                    <a class="text-neutral-600 dark:text-neutral-300 font-semibold" href="https://thoitrangthethaoali.com/">Phương Thanh Sport</a>
                 </div>
             </footer>
         </>
