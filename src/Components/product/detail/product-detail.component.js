@@ -37,7 +37,7 @@ const DetailProduct = () => {
                         <div className="flex flex-col lg:flex-row gap-8">
                             {/* Carousel for Product Images */}
                             <div className="w-full h-auto lg:w-1/2">
-                                <Carousel slide={true} className="w-full h-full">
+                                <Carousel slide={true} className="w-full h-auto">
                                     {product.images.map((image, index) => (
                                         <div key={index} className="relative w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[550px]">
                                             <img
@@ -55,7 +55,7 @@ const DetailProduct = () => {
                                     <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
                                         {product.name}
                                     </h1>
-                                    <Badge className = "w-[80px] text-center"><h3 className = "text-base">{product.brand}</h3></Badge>
+                                    <Badge className="w-[80px] text-center"><h3 className="text-base">{product.brand}</h3></Badge>
                                     <div className="flex items-center gap-3">
                                         <span className="text-lg font-semibold text-gray-600">
                                             {product.price} VND
@@ -129,12 +129,14 @@ const DetailProduct = () => {
                             </p>
                         </div>
                         {/* Product Data Section */}
-                        <div className="mt-12">
-                            <Card>
-                                <h2 className="text-2xl font-bold text-gray-900">Thêm thông tin khác về sản phẩm</h2>
-                                <p className="text-gray-700 leading-relaxed mt-4">{product.data}</p>
-                            </Card>
-                        </div>
+                        {product.data && (
+                            <div className="mt-12">
+                                <Card>
+                                    <h2 className="text-2xl font-bold text-gray-900">Thêm thông tin khác về sản phẩm</h2>
+                                    <p className="text-gray-700 leading-relaxed mt-4">{product.data}</p>
+                                </Card>
+                            </div>
+                        )}
                     </div>
                 </section>
             ) : (

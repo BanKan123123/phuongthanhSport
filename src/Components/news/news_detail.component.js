@@ -53,7 +53,6 @@ const NewsDetail = () => {
 
                 {/* Description */}
                 <p className="mt-6 text-gray-800 text-lg leading-relaxed tracking-wide p-6 bg-white rounded-lg border border-gray-200">
-                    <span className="block font-semibold text-xl text-blue-800 mb-4">Mô tả chi tiết:</span>
                     {news.description.split('. ').map((sentence, index) => (
                         <span key={index} className="block mb-2">
                             {sentence}.
@@ -64,9 +63,6 @@ const NewsDetail = () => {
                 {/* Detailed list of products */}
                 {news.detail.length > 0 && (
                     <div className="mt-6">
-                        <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">
-                            Chi tiết sản phẩm
-                        </h2>
                         {news.detail.map((item, index) => (
                             <div
                                 key={index}

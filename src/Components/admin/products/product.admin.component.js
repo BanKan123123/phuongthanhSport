@@ -33,6 +33,8 @@ const ProductAdmin = () => {
         data: ""
     });
 
+    const [uploadedImageUrls, setUploadedImageUrls] = useState([]);
+
     const handleFileChange = async (e) => {
         const files = Array.from(e.target.files); // Chuyển FileList thành Array
         const uploadedImageUrls = [];
@@ -52,6 +54,45 @@ const ProductAdmin = () => {
             ...prevProduct,
             images: [...prevProduct.images, ...uploadedImageUrls], // Giữ lại các ảnh đã có và thêm ảnh mới
         }));
+    };
+
+    const handleEditFileChange = async (e) => {
+        const files = Array.from(e.target.files); // Chuyển FileList thành Array
+        const uploadedImageUrls = [];
+
+        // Upload từng ảnh lên Cloudinary
+        for (let i = 0; i < files.length; i++) {
+            try {
+                const imageUrl = await uploadImageToCloudinary(files[i]);
+                uploadedImageUrls.push(imageUrl); // Thêm URL của ảnh đã upload vào mảng
+            } catch (error) {
+                console.error("Error uploading image:", error);
+            }
+        }
+        // Cập nhật state của newProduct với danh sách các ảnh mới được upload
+        if (uploadedImageUrls) {
+            setUploadedImageUrls(uploadedImageUrls);
+            setEditProduct((prevProduct) => ({
+                ...prevProduct,
+                images: uploadedImageUrls, // Giữ lại các ảnh đã có và thêm ảnh mới
+            }));
+        }
+    };
+
+    // Function to handle form submission (PUT request)
+    const handleUpdateProduct = async () => {
+        console.log(uploadedImageUrls);
+        if (uploadedImageUrls.length > 0) {
+            try {
+                await axios.put(`${API_PRODUCT}/${editProduct.id}`, editProduct);
+                setIsModalOpen(false); // Close the modal after updating
+                navigate(0);
+            } catch (error) {
+                console.error("Error updating product:", error);
+            }
+        } else {
+            alert("Product Wait")
+        }
     };
 
     const uploadImageToCloudinary = async (file) => {
@@ -133,16 +174,7 @@ const ProductAdmin = () => {
         }));
     };
 
-    // Function to handle form submission (PUT request)
-    const handleUpdateProduct = async () => {
-        try {
-            await axios.put(`${API_PRODUCT}/${editProduct.id}`, editProduct);
-            setIsModalOpen(false); // Close the modal after updating
-            navigate(0);
-        } catch (error) {
-            console.error("Error updating product:", error);
-        }
-    };
+
 
 
     return (
@@ -246,7 +278,7 @@ const ProductAdmin = () => {
                                                         name="images"
                                                         multiple
                                                         accept="image/*"
-                                                        onChange={handleFileChange} // Hàm xử lý upload nhiều ảnh
+                                                        onChange={(e) => handleEditFileChange(e)} // Hàm xử lý upload nhiều ảnh
                                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                                                     />
                                                 </div>

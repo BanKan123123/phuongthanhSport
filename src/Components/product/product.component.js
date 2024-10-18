@@ -9,19 +9,17 @@ const ProductComponent = () => {
     const [filteredProducts, setFilteredProducts] = useState([
 
     ]);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const fetchDataProducts = async () => {
+        try {
+            const response = await axios.get(API_PRODUCT);
+            setProducts(response.data);
+            setFilteredProducts(response.data); // Initialize filtered products
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchDataProducts = async () => {
-            try {
-                const response = await axios.get(API_PRODUCT);
-                setProducts(response.data);
-                setFilteredProducts(response.data); // Initialize filtered products
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
-
         fetchDataProducts();
     }, []);
 
@@ -30,7 +28,7 @@ const ProductComponent = () => {
         if (category === "") {
             setFilteredProducts(products); // Reset filter
         } else {
-            const filtered = products.filter((product) => {
+            const filtered = filteredProducts.filter((product) => {
                 return product.category.toLowerCase() === category.trim().toLowerCase()
             });
             setFilteredProducts(filtered);
@@ -46,7 +44,6 @@ const ProductComponent = () => {
                 <div className="mb-4 text-center">
                     <select
                         className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                        value={selectedCategory}
                         onChange={(e) => handleFilterChange(e)}
                     >
                         <option value="">Tất cả danh mục</option>
@@ -60,11 +57,11 @@ const ProductComponent = () => {
                     {filteredProducts.map((product) => (
                         <Link to={`/home/product/detail/${product.id}`} key={product.id} className="group">
                             <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full">
-                                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden">
+                                <div className="w-full h-96 overflow-hidden">
                                     <img
                                         src={product.images[0]}
                                         alt={product.name}
-                                        className="h-full w-full object-cover object-center"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                                 <div className="p-4">
@@ -85,6 +82,7 @@ const ProductComponent = () => {
                         </Link>
                     ))}
                 </div>
+
             </div>
         </div>
     );
