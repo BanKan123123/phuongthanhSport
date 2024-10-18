@@ -374,6 +374,22 @@ const ProductAdmin = () => {
                                                     />
                                                 </div>
 
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Danh mục sản phẩm
+                                                    </label>
+                                                    <select
+                                                        className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                                                        onChange={(e) => handleInputEditChange(e)}
+                                                        name="category"
+                                                    >
+                                                        <option value="áo">Áo</option>
+                                                        <option value="vợt">Vợt</option>
+                                                        <option value="giày">Giày</option>
+                                                    </select>
+                                                </div>
+
+
                                                 {/* Dữ liệu khác */}
                                                 <div className="mb-4">
                                                     <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -492,6 +508,21 @@ const ProductAdmin = () => {
                                 onChange={handleInputChange}
                                 required
                             />
+                        </div>
+
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Danh mục sản phẩm
+                            </label>
+                            <select
+                                className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                                onChange={(e) => handleInputChange(e)}
+                                name="category"
+                            >
+                                <option value="áo">Áo</option>
+                                <option value="vợt">Vợt</option>
+                                <option value="giày">Giày</option>
+                            </select>
                         </div>
                         <div className="mb-4">
                             <Label htmlFor="data" value="Dữ liệu" />
