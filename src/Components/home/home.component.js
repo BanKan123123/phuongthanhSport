@@ -55,12 +55,10 @@ const Home = () => {
 
                 <div className="list-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 justify-center rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 p-4 sm:p-6 lg:p-8">
                     {products.map(product => (
-                        <Card
-                            key={product.id}
-                            className="flowbite-card h-full flex flex-col p-4 sm:p-6 rounded-lg shadow-lg bg-gray-50 dark:bg-gray-700 hover:shadow-xl transition-shadow duration-300"
+                        <Card key={product.id}
+                            className="w-auto flowbite-card h-full flex flex-col p-4 sm:p-6 rounded-lg shadow-lg bg-gray-50 dark:bg-gray-700 hover:shadow-xl transition-shadow duration-300"
                             imgAlt={product.name}
-                            imgSrc={product.images[0]}
-                        >
+                            imgSrc={product.images[0]}>
                             <Link to={`/home/product/detail/${product.id}`}>
                                 <h5 className="text-base sm:text-lg font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                     {product.name}
@@ -92,10 +90,10 @@ const Home = () => {
                             >
                                 Thêm vào giỏ hàng
                             </Link>
-                        </Card>
+                        </Card >
                     ))}
                 </div>
-            </section>
+            </section >
 
             <section className="about bg-gray-100 py-10">
                 <div className="container mx-auto">
@@ -109,7 +107,7 @@ const Home = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Vision */}
                         <div className="mb-12">
-                            <Card imgAlt="Vision Image" imgSrc={images.vision} className="card shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <Card imgAlt="Vision Image" className="card shadow-lg hover:shadow-xl transition-shadow duration-300">
                                 <h2 className="text-2xl font-semibold mb-4 text-cyan-600">Tầm nhìn</h2>
                                 <p className="text-lg text-gray-700">
                                     Phương Thanh Sport hướng đến trở thành đơn vị dẫn đầu cả nước trong lĩnh vực thể thao,
@@ -120,7 +118,7 @@ const Home = () => {
 
                         {/* Mission */}
                         <div className="mb-12">
-                            <Card imgAlt="Mission Image" imgSrc={images.mission} className="card shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <Card imgAlt="Mission Image" className="card shadow-lg hover:shadow-xl transition-shadow duration-300">
                                 <h2 className="text-2xl font-semibold mb-4 text-cyan-600">Sứ mệnh</h2>
                                 <p className="text-lg text-gray-700">
                                     Mang đến cho khách hàng những sản phẩm chất lượng cao và dịch vụ chăm sóc tận tâm,
@@ -131,7 +129,7 @@ const Home = () => {
 
                         {/* Core Values */}
                         <div className="mb-12 md:col-span-2">
-                            <Card imgAlt="Core Values Image" imgSrc={images.values} className="card shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <Card imgAlt="Core Values Image" className="card shadow-lg hover:shadow-xl transition-shadow duration-300">
                                 <h2 className="text-2xl font-semibold mb-4 text-cyan-600">Giá trị cốt lõi</h2>
                                 <ul className="list-disc list-inside text-lg text-gray-700">
                                     <li className="mb-2">Chất lượng: Cam kết cung cấp sản phẩm tốt nhất từ các thương hiệu uy tín.</li>
