@@ -39,7 +39,7 @@ const DetailProduct = () => {
                             <div className="w-full h-auto lg:w-1/2">
                                 <Carousel slide={true} className="w-full h-auto">
                                     {product.images.map((image, index) => (
-                                        <div key={index} className="relative w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px]">
+                                        <div key={index} className="relative w-full h-[350px] sm:h-[500px] md:h-[550px] lg:h-[600px] xl:h-[650px]">
                                             <img
                                                 src={image}
                                                 alt={product.name}
@@ -119,16 +119,18 @@ const DetailProduct = () => {
                                             </Link>
                                         </Button>
                                     </div>
+
+                                    {/* Product Description */}
+                                    <div className="mt-6">
+                                        <h3 className="text-sm font-medium">Mô tả:</h3>
+                                        <p className="text-gray-700 leading-relaxed mt-2 whitespace-pre-wrap">
+                                            {product.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        {/* Product Description */}
-                        <div className="mt-6">
-                            <h2 className="text-lg font-semibold text-gray-900">Mô tả:</h2>
-                            <p className="text-gray-700 leading-relaxed mt-2">
-                                {product.description}
-                            </p>
-                        </div>
+
                         {/* Product Data Section */}
                         {product.data && (
                             <div className="mt-12">
