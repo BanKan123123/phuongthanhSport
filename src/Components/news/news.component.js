@@ -29,7 +29,7 @@ const NewsPage = () => {
                     {news.map((newItem) => ( // Đổi tên biến từ new thành newItem
                         <div key={newItem.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
                             <img
-                                className="w-full h-56 object-cover"
+                                className="w-full h-56 object-contain"
                                 src={newItem.detail[0].image} // Thay thế src bằng ảnh đầu tiên trong mảng images
                                 alt={newItem.title}
                                 style={{ width: "800px", height: "600px" }}

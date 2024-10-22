@@ -27,6 +27,10 @@ const NewsDetail = () => {
         fetchDataNewById();
     }, [id]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [news]);
+
     return (
         <div className="container mx-auto my-10 px-4">
             <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300">
@@ -74,8 +78,16 @@ const NewsDetail = () => {
                                     </h3>
                                     {/* Description */}
                                     <div className="text-gray-700 leading-relaxed mb-4 space-y-2">
-                                        {item.description.split('. ').map((sentence, index) => (
-                                            <p key={index}>{sentence}.</p>
+                                        <h3 className="text-xl font-semibold text-blue-900 mb-4"> Mô tả: </h3>
+                                        {item.description.split('\n').map((line, index) => (
+                                            <p key={index}>
+                                                {line.split('. ').map((sentence, subIndex) => (
+                                                    <span key={subIndex}>
+                                                        {sentence}.
+                                                        {subIndex < line.split('. ').length - 1 ? <br /> : null} {/* Thêm <br /> giữa các câu */}
+                                                    </span>
+                                                ))}
+                                            </p>
                                         ))}
                                     </div>
                                     {/* Image container with Flexbox to center the image */}
@@ -87,9 +99,17 @@ const NewsDetail = () => {
                                         />
                                     </div>
                                     {/* Data */}
-                                    <div className="text-gray-800 font-semibold text-lg leading-relaxed space-y-2">
-                                        {item.data.split('. ').map((feature, index) => (
-                                            <p key={index}>{feature}.</p>
+                                    <div className="text-gray-800 text-lg leading-relaxed space-y-2">
+                                        <h3 className="text-xl font-semibold text-blue-900 mb-4">  Đặc điểm nổi bật: </h3>
+                                        {item.data.split('\n').map((line, lineIndex) => (
+                                            <p key={lineIndex}>
+                                                {line.split('. ').map((feature, featureIndex) => (
+                                                    <span key={featureIndex}>
+                                                        {feature}.
+                                                        {featureIndex < line.split('. ').length - 1 ? <br /> : null} {/* Thêm <br /> giữa các câu */}
+                                                    </span>
+                                                ))}
+                                            </p>
                                         ))}
                                     </div>
                                 </div>

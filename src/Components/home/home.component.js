@@ -56,13 +56,13 @@ const Home = () => {
                 <div className="list-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 justify-center rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 p-4 sm:p-6 lg:p-8">
                     {products.map(product => (
                         <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full h-full flex flex-col">
-                            <div className="w-full h-96 overflow-hidden">
+                            <Link to = {`/home/product/detail/${product.id}`} className="w-full h-96 overflow-hidden">
                                 <img
                                     src={product.images[0]}
                                     alt={product.name}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain"
                                 />
-                            </div>
+                            </Link>
                             <div className="p-4 flex-1 flex flex-col justify-between">
                                 <div>
                                     <h3 className="mt-2 text-lg font-semibold text-gray-800">{product.name}</h3>

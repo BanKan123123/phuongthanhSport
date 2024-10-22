@@ -32,13 +32,14 @@ const ProductAdmin = () => {
         description: "",
         data: ""
     });
+    const [uploadStatus, setUploadStatus] = useState(false);
+    const [imagesChoosen, setImagesChoosen] = useState([]);
 
     const [uploadedImageUrls, setUploadedImageUrls] = useState([]);
 
     const handleFileChange = async (e) => {
         const files = Array.from(e.target.files); // Chuyển FileList thành Array
         const uploadedImageUrls = [];
-
         // Upload từng ảnh lên Cloudinary
         for (let i = 0; i < files.length; i++) {
             try {
@@ -58,8 +59,9 @@ const ProductAdmin = () => {
 
     const handleEditFileChange = async (e) => {
         const files = Array.from(e.target.files); // Chuyển FileList thành Array
-        const uploadedImageUrls = [];
 
+        const uploadedImageUrls = [];
+        setImagesChoosen(files);
         // Upload từng ảnh lên Cloudinary
         for (let i = 0; i < files.length; i++) {
             try {
@@ -76,13 +78,33 @@ const ProductAdmin = () => {
                 ...prevProduct,
                 images: uploadedImageUrls, // Giữ lại các ảnh đã có và thêm ảnh mới
             }));
+        } else {
+            setEditProduct((prevProduct) => ({
+                ...prevProduct,
+            }));
         }
     };
 
     // Function to handle form submission (PUT request)
     const handleUpdateProduct = async () => {
-        console.log(uploadedImageUrls);
-        if (uploadedImageUrls.length > 0) {
+        console.log("Image", imagesChoosen, "Status", uploadStatus);
+        // Nếu có ảnh được upload, chờ cho đến khi hoàn tất trước khi cập nhật
+        if (imagesChoosen.length > 0) {
+            if (uploadStatus) {
+                try {
+                    await axios.put(`${API_PRODUCT}/${editProduct.id}`, {
+                        ...editProduct,
+                        images: uploadedImageUrls, // Kết hợp ảnh cũ và ảnh mới
+                    });
+                    setIsModalOpen(false); // Close the modal after updating
+                    navigate(0);
+                } catch (error) {
+                    console.error("Error updating product:", error);
+                }
+            } else {
+                alert("Product Wait");
+            }
+        } else {
             try {
                 await axios.put(`${API_PRODUCT}/${editProduct.id}`, editProduct);
                 setIsModalOpen(false); // Close the modal after updating
@@ -90,29 +112,35 @@ const ProductAdmin = () => {
             } catch (error) {
                 console.error("Error updating product:", error);
             }
-        } else {
-            alert("Product Wait")
         }
     };
 
     const uploadImageToCloudinary = async (file) => {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("upload_preset", "phuongthanhsport"); // Replace with your Cloudinary upload preset
+        formData.append("upload_preset", "phuongthanhsport"); // Thay thế bằng upload preset của bạn
+        setUploadStatus(false); // Thiết lập trạng thái upload
 
-        const response = await fetch(
-            `https://api.cloudinary.com/v1_1/danxxxdpj/image/upload`, // Replace YOUR_CLOUD_NAME with your Cloudinary cloud name
-            {
-                method: "POST",
-                body: formData,
+        try {
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/danxxxdpj/image/upload`, // Thay YOUR_CLOUD_NAME bằng tên cloud của bạn
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
+
+            const data = await response.json();
+            if (data.secure_url) {
+                setUploadStatus(true); // Cập nhật trạng thái khi upload thành công
+                return data.secure_url; // Đây là URL của hình ảnh đã upload
+            } else {
+                throw new Error("Failed to upload image to Cloudinary");
             }
-        );
-
-        const data = await response.json();
-        if (data.secure_url) {
-            return data.secure_url; // This is the URL of the uploaded image
-        } else {
-            throw new Error("Failed to upload image to Cloudinary");
+        } catch (error) {
+            setUploadStatus(false); // Cập nhật trạng thái khi có lỗi xảy ra
+            console.error("Error uploading image:", error);
+            throw error; // Ném lại lỗi để xử lý ngoài
         }
     };
 
