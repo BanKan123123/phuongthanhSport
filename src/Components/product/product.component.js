@@ -61,7 +61,7 @@ const ProductComponent = () => {
                 <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                     {filteredProducts.map((product) => (
                         <Link to={`/home/product/detail/${product.id}`} key={product.id} className="group">
-                            <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full">
+                            <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full h-full flex flex-col">
                                 <div className="w-full h-96 overflow-hidden">
                                     <img
                                         src={product.images[0]}
@@ -69,9 +69,11 @@ const ProductComponent = () => {
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
-                                <div className="p-4">
-                                    <h3 className="mt-2 text-lg font-semibold text-gray-800">{product.name}</h3>
-                                    <p className="mt-1 text-lg font-medium text-gray-900">{product.price} VND</p>
+                                <div className="p-4 flex-1 flex flex-col justify-between">
+                                    <div>
+                                        <h3 className="mt-2 text-lg font-semibold text-gray-800">{product.name}</h3>
+                                        <p className="mt-1 text-lg font-medium text-gray-900">{product.price} VND</p>
+                                    </div>
                                     <p className="mt-1 text-sm text-gray-600 line-clamp-3">
                                         {product.description.length > 100 ? (
                                             <>
@@ -85,6 +87,7 @@ const ProductComponent = () => {
                                 </div>
                             </div>
                         </Link>
+
                     ))}
                 </div>
 

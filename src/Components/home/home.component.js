@@ -55,42 +55,37 @@ const Home = () => {
 
                 <div className="list-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 justify-center rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 p-4 sm:p-6 lg:p-8">
                     {products.map(product => (
-                        <Card key={product.id}
-                            className="w-auto flowbite-card h-full flex flex-col p-4 sm:p-6 rounded-lg shadow-lg bg-gray-50 dark:bg-gray-700 hover:shadow-xl transition-shadow duration-300"
-                            imgAlt={product.name}
-                            imgSrc={product.images[0]}>
-                            <Link to={`/home/product/detail/${product.id}`}>
-                                <h5 className="text-base sm:text-lg font-bold tracking-tight text-gray-900 dark:text-white truncate">
-                                    {product.name}
-                                </h5>
-                            </Link>
-
-                            <div className="mt-2 flex items-center space-x-1">
-                                {[...Array(5)].map((_, i) => (
-                                    <svg
-                                        key={i}
-                                        className="h-4 w-4 text-yellow-400"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                ))}
-                                <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">5.0</span>
+                        <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full h-full flex flex-col">
+                            <div className="w-full h-96 overflow-hidden">
+                                <img
+                                    src={product.images[0]}
+                                    alt={product.name}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
-
-                            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between">
-                                <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{product.price} VND</span>
+                            <div className="p-4 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 className="mt-2 text-lg font-semibold text-gray-800">{product.name}</h3>
+                                    <p className="mt-1 text-lg font-medium text-gray-900">{product.price} VND</p>
+                                </div>
+                                <p className="mt-1 text-sm text-gray-600 line-clamp-3">
+                                    {product.description.length > 100 ? (
+                                        <>
+                                            {product.description.slice(0, 100)}...{" "}
+                                            <span className="text-cyan-500 cursor-pointer hover:underline">Đọc thêm</span>
+                                        </>
+                                    ) : (
+                                        product.description
+                                    )}
+                                </p>
                             </div>
-
                             <Link
                                 to="https://www.facebook.com/profile.php?id=61566847335730&is_tour_dismissed"
                                 className="mt-4 w-full sm:w-auto text-center rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                             >
                                 Thêm vào giỏ hàng
                             </Link>
-                        </Card >
+                        </div>
                     ))}
                 </div>
             </section >
