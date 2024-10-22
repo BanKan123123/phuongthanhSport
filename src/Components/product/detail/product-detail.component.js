@@ -39,16 +39,17 @@ const DetailProduct = () => {
                             <div className="w-full h-auto lg:w-1/2">
                                 <Carousel slide={true} className="w-full h-auto">
                                     {product.images.map((image, index) => (
-                                        <div key={index} className="relative w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[550px]">
+                                        <div key={index} className="relative w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px]">
                                             <img
                                                 src={image}
                                                 alt={product.name}
-                                                className="object-cover object-center w-full h-full rounded-lg"
+                                                className="object-contain w-full h-full rounded-lg"
                                             />
                                         </div>
                                     ))}
                                 </Carousel>
                             </div>
+
                             {/* Product Details */}
                             <div className="lg:w-1/2 flex flex-col">
                                 <div className="flex flex-col gap-4">
