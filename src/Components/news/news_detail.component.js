@@ -100,17 +100,19 @@ const NewsDetail = () => {
                                     </div>
                                     {/* Data */}
                                     <div className="text-gray-800 text-lg leading-relaxed space-y-2">
-                                        <h3 className="text-xl font-semibold text-blue-900 mb-4">  Đặc điểm nổi bật: </h3>
-                                        {item.data.split('\n').map((line, lineIndex) => (
-                                            <p key={lineIndex}>
-                                                {line.split('. ').map((feature, featureIndex) => (
-                                                    <span key={featureIndex}>
-                                                        {feature}.
-                                                        {featureIndex < line.split('. ').length - 1 ? <br /> : null} {/* Thêm <br /> giữa các câu */}
-                                                    </span>
-                                                ))}
-                                            </p>
-                                        ))}
+                                        {item.data.trim() === "" && <>
+                                            <h3 className="text-xl font-semibold text-blue-900 mb-4">  Đặc điểm nổi bật: </h3>
+                                            {item.data.split('\n').map((line, lineIndex) => (
+                                                <p key={lineIndex}>
+                                                    {line.split('. ').map((feature, featureIndex) => (
+                                                        <span key={featureIndex}>
+                                                            {feature}.
+                                                            {featureIndex < line.split('. ').length - 1 ? <br /> : null} {/* Thêm <br /> giữa các câu */}
+                                                        </span>
+                                                    ))}
+                                                </p>
+                                            ))}
+                                        </>}
                                     </div>
                                 </div>
                             </div>
