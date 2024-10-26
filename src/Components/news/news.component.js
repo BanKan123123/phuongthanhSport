@@ -27,7 +27,7 @@ const NewsPage = () => {
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     {news.map((newItem) => ( // Đổi tên biến từ new thành newItem
-                        <div key={newItem.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <Link to={`/home/tin-tuc/${newItem.id}`} key={newItem.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
                             <img
                                 className="w-full h-56 object-contain"
                                 src={newItem.detail[0].image} // Thay thế src bằng ảnh đầu tiên trong mảng images
@@ -39,9 +39,9 @@ const NewsPage = () => {
                                 <p className="text-gray-600 mt-2">
                                     {newItem.description.length > 100 ? `${newItem.description.substring(0, 100)}...` : newItem.description} {/* Hiển thị mô tả */}
                                 </p>
-                                <Link to={`/home/tin-tuc/${newItem.id}`} className="text-blue-500 hover:underline mt-4 block">Đọc thêm</Link>
+                                <span  className="text-blue-500 hover:underline mt-4 block">Đọc thêm</span>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

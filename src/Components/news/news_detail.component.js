@@ -78,7 +78,7 @@ const NewsDetail = () => {
                                     </h3>
                                     {/* Description */}
                                     <div className="text-gray-700 leading-relaxed mb-4 space-y-2">
-                                        <h3 className="text-xl font-semibold text-blue-900 mb-4"> Mô tả: </h3>
+                                        {/* <h3 className="text-xl font-semibold text-blue-900 mb-4"> Mô tả: </h3> */}
                                         {item.description.split('\n').map((line, index) => (
                                             <p key={index}>
                                                 {line.split('. ').map((sentence, subIndex) => (
@@ -91,13 +91,15 @@ const NewsDetail = () => {
                                         ))}
                                     </div>
                                     {/* Image container with Flexbox to center the image */}
-                                    <div className="flex justify-center mb-4">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="h-full w-full sm:w-[500px] md:w-[550px] lg:w-[600px] xl:w-[650] object-cover"
-                                        />
-                                    </div>
+                                    {item.image && <>
+                                        <div className="flex justify-center mb-4">
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                className="h-full w-full sm:w-[500px] md:w-[550px] lg:w-[600px] xl:w-[650] object-cover"
+                                            />
+                                        </div>
+                                    </>}
                                     {/* Data */}
                                     <div className="text-gray-800 text-lg leading-relaxed space-y-2">
                                         {item.data.trim() && <>
