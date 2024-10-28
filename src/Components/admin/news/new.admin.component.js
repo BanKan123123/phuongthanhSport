@@ -49,7 +49,7 @@ const NewsAdmin = () => {
         const { name, value } = e.target;
         setNewNews((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: value.trim(),
         }));
     };
 
@@ -67,7 +67,7 @@ const NewsAdmin = () => {
     const handleDetailChange = (index, e) => {
         const { name, value } = e.target;
         const updatedDetails = newNews.detail.map((detail, i) =>
-            i === index ? { ...detail, [name]: value } : detail
+            i === index ? { ...detail, [name]: value.trim() } : detail
         );
         setNewNews((prevNews) => ({
             ...prevNews,

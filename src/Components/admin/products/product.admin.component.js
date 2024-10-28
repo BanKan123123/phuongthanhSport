@@ -173,7 +173,7 @@ const ProductAdmin = () => {
         const { name, value } = e.target;
         setNewProduct({
             ...newProduct,
-            [name]: value,
+            [name]: value.trim(),
         });
     };
 
