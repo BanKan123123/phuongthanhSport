@@ -49,13 +49,25 @@ const NewsAdmin = () => {
         const { name, value } = e.target;
         setNewNews((prevState) => ({
             ...prevState,
-            [name]: value.trim(),
+            [name]: value,
         }));
     };
 
     const handleAddNews = async () => {
         try {
-            await axios.post(API_NEWS, newNews);
+            const data = {
+                title: newNews.title.trim(),
+                description: newNews.description.trim(),
+                detail: [
+                    {
+                        title: newNews.detail.title.trim(),
+                        description: newNews.detail.description.trim(),
+                        image: newNews.detail.image.trim(),
+                        data: newNews.detail.data.trim()
+                    },
+                ]
+            }
+            await axios.post(API_NEWS, data);
             navigate(0);
         } catch (err) {
             console.err(err);
@@ -67,7 +79,7 @@ const NewsAdmin = () => {
     const handleDetailChange = (index, e) => {
         const { name, value } = e.target;
         const updatedDetails = newNews.detail.map((detail, i) =>
-            i === index ? { ...detail, [name]: value.trim() } : detail
+            i === index ? { ...detail, [name]: value } : detail
         );
         setNewNews((prevNews) => ({
             ...prevNews,

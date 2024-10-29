@@ -179,7 +179,20 @@ const ProductAdmin = () => {
 
     const handleSubmit = async () => {
         try {
-            await axios.post(API_PRODUCT, newProduct);
+            const data = {
+                ma: newProduct.ma.trim(),
+                name: newProduct.name.trim(),
+                images: newProduct.images,
+                brand: newProduct.brand.trim(),
+                status: newProduct.status,
+                colours: newProduct.colours,
+                size: newProduct.size,
+                price: newProduct.price.trim(),
+                description: newProduct.description.trim(),
+                data: newProduct.data.trim()
+            };
+
+            await axios.post(API_PRODUCT, data);
             setProducts([...products, newProduct]);
             setShowModal(false); // Đóng modal sau khi thêm sản phẩm
             navigate(0);
