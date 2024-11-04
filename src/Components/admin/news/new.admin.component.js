@@ -10,14 +10,7 @@ const NewsAdmin = () => {
     const [newNews, setNewNews] = useState({
         title: "",
         description: "",
-        detail: [
-            {
-                title: "",
-                description: "",
-                image: "",
-                data: ""
-            },
-        ]
+        detail: [{ title: "", description: "", image: "", data: "" }]
     });
 
     const navigate = useNavigate();
@@ -44,7 +37,6 @@ const NewsAdmin = () => {
         }
     };
 
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewNews((prevState) => ({
@@ -58,22 +50,15 @@ const NewsAdmin = () => {
             const data = {
                 title: newNews.title.trim(),
                 description: newNews.description.trim(),
-                detail: [
-                    {
-                        title: newNews.detail.title.trim(),
-                        description: newNews.detail.description.trim(),
-                        image: newNews.detail.image.trim(),
-                        data: newNews.detail.data.trim()
-                    },
-                ]
-            }
+                detail: newNews.detail // Gửi toàn bộ mảng `detail` từ `newNews`
+            };
+            console.log("Data to be sent:", data); // Debugging log
             await axios.post(API_NEWS, data);
             navigate(0);
         } catch (err) {
-            console.err(err);
+            console.log(err);
         }
     };
-
 
     // Function to handle input change for the detail array
     const handleDetailChange = (index, e) => {
@@ -89,10 +74,10 @@ const NewsAdmin = () => {
 
     const uploadImageToCloudinary = async (file) => {
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append("file", file);
         formData.append("upload_preset", "phuongthanhsport");
         const response = await fetch(
-            `https://api.cloudinary.com/v1_1/danxxxdpj/image/upload`, // Thay YOUR_CLOUD_NAME bằng tên Cloudinary của bạn
+            `https://api.cloudinary.com/v1_1/danxxxdpj/image/upload`,
             {
                 method: "POST",
                 body: formData,
@@ -105,14 +90,12 @@ const NewsAdmin = () => {
         } else {
             throw new Error("Failed to upload image to Cloudinary");
         }
-    }
+    };
 
     // Function to handle file input for images in detail array
     const handleDetailFileChange = async (index, e) => {
         const file = e.target.files[0];
-
         const urlImage = await uploadImageToCloudinary(file);
-
         const updatedDetails = newNews.detail.map((detail, i) =>
             i === index ? { ...detail, image: urlImage } : detail
         );
@@ -281,7 +264,7 @@ const NewsAdmin = () => {
                                 </Table.Cell>
                                 <Table.Cell>
                                     <button
-                                        className="text-red-500 hover:text-red-700"
+                                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                         onClick={() => handleDelete(product.id)}
                                     >
                                         Xóa
@@ -295,6 +278,5 @@ const NewsAdmin = () => {
         </>
     );
 };
-
 
 export default NewsAdmin;
